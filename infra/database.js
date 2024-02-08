@@ -1,4 +1,4 @@
-import { Client } from "pg";
+import { Client, Pool } from "pg";
 
 async function connectDatabase() {
   const client = new Client(databaseAccessConfiguration());
@@ -19,11 +19,16 @@ function databaseAccessConfiguration() {
 
 async function query(queryObject) {
   const client = await connectDatabase();
-  const result = await client.query(queryObject);
-  await client.end();
-  return result;
+  try {
+    const result = await client.query(queryObject);
+    return result;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    await client.end();
+  }
 }
 
 export default {
-  query: query,
+  query,
 };
