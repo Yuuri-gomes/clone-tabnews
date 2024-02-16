@@ -13,7 +13,7 @@ function databaseAccessConfiguration() {
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
-    ssl: process.env.NODE_ENV !== "development",
+    ssl: getSSLValues(),
   };
   return databaseObjectConfiguration;
 }
@@ -28,6 +28,15 @@ async function query(queryObject) {
   } finally {
     await client.end();
   }
+}
+
+function getSSLValues() {
+  if (process.env.POSTGRES_CA) {
+    return {
+      ca: process.env.POSTGRES_CA,
+    };
+  }
+  return process.env.NODE_ENV !== "development";
 }
 
 export default {
