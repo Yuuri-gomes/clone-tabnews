@@ -1,12 +1,12 @@
 import { Client, Pool } from "pg";
 
 async function connectDatabase() {
-  const client = new Client(databaseAccessConfiguration());
+  const client = new Client(getNewClient());
   await client.connect();
   return client;
 }
 
-function databaseAccessConfiguration() {
+function getNewClient() {
   const databaseObjectConfiguration = {
     host: process.env.POSTGRES_HOST,
     port: process.env.POSTGRES_PORT,
@@ -41,4 +41,5 @@ function getSSLValues() {
 
 export default {
   query,
+  connectDatabase
 };
