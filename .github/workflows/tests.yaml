@@ -1,4 +1,4 @@
-name: Automated Tests
+name: Automated Tests validando commit
 
 on: pull_request
 
