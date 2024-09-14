@@ -6,10 +6,10 @@ export default async function migrations(request, response) {
   const allowedMethods = ["GET", "POST"];
   if (methodNotAllowed(allowedMethods, request.method)) {
     return response.status(405).json({
-      error: `Method '${request.method}' not allowed`
+      error: `Method '${request.method}' not allowed`,
     });
   }
-  
+
   let dbClient;
   try {
     dbClient = await database.connectDatabase();
@@ -39,7 +39,7 @@ export default async function migrations(request, response) {
       response.status(200).json(migratedMigrations);
     }
     return response.status(405).end();
-  } catch(error) {
+  } catch (error) {
     console.error(error);
     throw error;
   } finally {
