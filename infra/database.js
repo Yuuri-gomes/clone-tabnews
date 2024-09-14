@@ -1,4 +1,4 @@
-import { Client, Pool } from "pg";
+import { Client } from "pg";
 
 async function connectDatabase() {
   const client = new Client(getNewClient());
@@ -38,8 +38,9 @@ function getSSLValues() {
   }
   return process.env.NODE_ENV === "production";
 }
-
-export default {
+const database = {
   query,
   connectDatabase,
 };
+
+export default database;
