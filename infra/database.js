@@ -41,5 +41,5 @@ function getSSLValues() {
 
 export default {
   query,
-  connectDatabase
+  connectDatabase,
 };
